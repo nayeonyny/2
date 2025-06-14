@@ -1,0 +1,134 @@
+/*
+  In a real React project, you would place this @import rule
+  in your project's main index.html or index.css file.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+
+/* --- Main Container & Backgrounds --- */
+.weather-container {
+    position: relative;
+    overflow: hidden;
+    transition: background-color 2s ease;
+}
+.clear-sky { background: linear-gradient(to top, #4a90e2, #87ceeb); }
+.cloudy { background: linear-gradient(to top, #7d97ad, #b0c4de); }
+.rainy { background: linear-gradient(to top, #495057, #6c757d); }
+.stormy { background: linear-gradient(to top, #212529, #343a40); }
+.snowy { background: linear-gradient(to top, #adb5bd, #dee2e6); }
+
+/* --- Sun Animation --- */
+.sun { 
+    width: 150px; 
+    height: 150px; 
+    background: radial-gradient(circle, rgba(255,255,0,1) 0%, rgba(252,210,0,1) 60%, rgba(255,255,255,0) 70%); 
+    border-radius: 50%; 
+    position: absolute; 
+    top: 5%; 
+    left: 10%; 
+    animation: pulse 4s infinite ease-in-out; 
+}
+@keyframes pulse { 
+    0%, 100% { transform: scale(1); } 
+    50% { transform: scale(1.1); } 
+}
+
+/* --- Cloud Animation --- */
+.cloud { 
+    width: 200px; 
+    height: 60px; 
+    background: #fff; 
+    border-radius: 30px; 
+    position: absolute; 
+    opacity: 0.8; 
+    animation-name: move-clouds;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; 
+}
+.cloud:before, .cloud:after { 
+    content: ''; 
+    position: absolute; 
+    background: #fff; 
+    width: 100px; 
+    height: 80px; 
+    top: -40px; 
+    left: 50px; 
+    border-radius: 50%; 
+}
+.cloud:after { 
+    width: 120px; 
+    height: 90px; 
+    top: -45px; 
+    left: auto; 
+    right: 40px; 
+}
+.cloud-1 { top: 15%; left: -250px; }
+.cloud-2 { top: 30%; left: -350px; }
+.cloud-3 { top: 10%; left: -150px; }
+@keyframes move-clouds { 
+    from { transform: translateX(0); } 
+    to { transform: translateX(calc(100vw + 400px)); } 
+}
+
+/* --- Rain Animation --- */
+.raindrop { 
+    position: absolute; 
+    bottom: 100%; 
+    width: 1px; 
+    height: 50px; 
+    background: linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,0.5)); 
+    animation: fall 0.5s linear infinite; 
+}
+@keyframes fall { 
+    to { transform: translateY(100vh); } 
+}
+
+/* --- Snow Animation --- */
+.snowflake { 
+    position: absolute; 
+    width: 10px; 
+    height: 10px; 
+    background: white; 
+    border-radius: 50%; 
+    top: -20px; 
+    animation: fall-snow linear infinite; 
+}
+@keyframes fall-snow { 
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; } 
+    100% { transform: translateY(100vh) translateX(50px) rotate(360deg); opacity: 0; } 
+}
+
+/* --- Lightning Animation --- */
+.lightning { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(255, 255, 255, 0.3); 
+    opacity: 0; 
+    z-index: 10; 
+    animation: flash 4s infinite; 
+}
+@keyframes flash { 
+    0%, 100% { opacity: 0; } 
+    5%, 10%, 15% { opacity: 1; } 
+    7%, 12% { opacity: 0; } 
+}
+
+/* --- UI Card & Controls --- */
+.info-card { 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+}
+.weather-controls button { 
+    transition: all 0.3s ease;
+}
+.weather-controls button:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+}
